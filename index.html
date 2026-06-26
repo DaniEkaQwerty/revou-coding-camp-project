@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,11 +21,11 @@
           extend: {
             colors: {
               surface: '#f0f6ff',
-              border:  '#dde8f5',
+              border: '#dde8f5',
               accent: {
                 DEFAULT: '#2563eb',
-                hover:   '#1d4ed8',
-                light:   '#eff6ff',
+                hover: '#1d4ed8',
+                light: '#eff6ff',
               },
             },
             fontFamily: {
@@ -45,37 +46,37 @@
        Design tokens — from design.md
     ====================================================================== */
     :root {
-      --color-bg:             #ffffff;
-      --color-surface:        #f0f6ff;
-      --color-border:         #dde8f5;
-      --color-accent:         #2563eb;
-      --color-accent-hover:   #1d4ed8;
-      --color-accent-light:   #eff6ff;
-      --color-text:           #0f172a;
+      --color-bg: #ffffff;
+      --color-surface: #f0f6ff;
+      --color-border: #dde8f5;
+      --color-accent: #2563eb;
+      --color-accent-hover: #1d4ed8;
+      --color-accent-light: #eff6ff;
+      --color-text: #0f172a;
       --color-text-secondary: #475569;
-      --color-text-muted:     #94a3b8;
+      --color-text-muted: #94a3b8;
       --color-text-on-accent: #ffffff;
 
       --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-      --text-xs:   12px;
-      --text-sm:   14px;
+      --text-xs: 12px;
+      --text-sm: 14px;
       --text-base: 16px;
-      --text-lg:   18px;
-      --text-xl:   24px;
-      --text-2xl:  36px;
+      --text-lg: 18px;
+      --text-xl: 24px;
+      --text-2xl: 36px;
 
-      --space-1:  4px;
-      --space-2:  8px;
-      --space-3:  12px;
-      --space-4:  16px;
-      --space-6:  24px;
-      --space-8:  32px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
       --space-12: 48px;
 
-      --radius-sm:   4px;
-      --radius-md:   8px;
-      --radius-lg:   12px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
       --radius-full: 9999px;
 
       --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -83,15 +84,15 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --color-bg:             #0f172a;
-        --color-surface:        #1e293b;
-        --color-border:         #334155;
-        --color-accent:         #3b82f6;
-        --color-accent-hover:   #60a5fa;
-        --color-accent-light:   #1e3a5f;
-        --color-text:           #f1f5f9;
+        --color-bg: #0f172a;
+        --color-surface: #1e293b;
+        --color-border: #334155;
+        --color-accent: #3b82f6;
+        --color-accent-hover: #60a5fa;
+        --color-accent-light: #1e3a5f;
+        --color-text: #f1f5f9;
         --color-text-secondary: #94a3b8;
-        --color-text-muted:     #475569;
+        --color-text-muted: #475569;
         --color-text-on-accent: #ffffff;
       }
     }
@@ -99,7 +100,13 @@
     /* =====================================================================
        Base
     ====================================================================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: var(--font-sans);
@@ -320,7 +327,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .loading-label {
@@ -350,6 +359,141 @@
     .hint-dot.active {
       background-color: var(--color-accent);
     }
+
+    /* =====================================================================
+       Soundwave visualizer
+    ====================================================================== */
+    #soundwave {
+      display: none;
+      /* hidden by default */
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      height: 36px;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    #soundwave.active {
+      display: flex;
+    }
+
+    .wave-bar {
+      width: 4px;
+      border-radius: var(--radius-full);
+      background-color: var(--color-accent);
+      /* Each bar animates up and down at a slightly different speed */
+      animation: wave-bounce 0.9s ease-in-out infinite alternate;
+      transform-origin: bottom;
+    }
+
+    /* Stagger each bar's animation so they feel like a real wave */
+    .wave-bar:nth-child(1) {
+      animation-duration: 0.70s;
+      animation-delay: 0.00s;
+    }
+
+    .wave-bar:nth-child(2) {
+      animation-duration: 0.85s;
+      animation-delay: 0.07s;
+    }
+
+    .wave-bar:nth-child(3) {
+      animation-duration: 0.65s;
+      animation-delay: 0.14s;
+    }
+
+    .wave-bar:nth-child(4) {
+      animation-duration: 0.95s;
+      animation-delay: 0.05s;
+    }
+
+    .wave-bar:nth-child(5) {
+      animation-duration: 0.75s;
+      animation-delay: 0.18s;
+    }
+
+    .wave-bar:nth-child(6) {
+      animation-duration: 0.60s;
+      animation-delay: 0.10s;
+    }
+
+    .wave-bar:nth-child(7) {
+      animation-duration: 0.88s;
+      animation-delay: 0.02s;
+    }
+
+    .wave-bar:nth-child(8) {
+      animation-duration: 0.72s;
+      animation-delay: 0.15s;
+    }
+
+    .wave-bar:nth-child(9) {
+      animation-duration: 0.80s;
+      animation-delay: 0.08s;
+    }
+
+    .wave-bar:nth-child(10) {
+      animation-duration: 0.67s;
+      animation-delay: 0.12s;
+    }
+
+    .wave-bar:nth-child(11) {
+      animation-duration: 0.92s;
+      animation-delay: 0.03s;
+    }
+
+    .wave-bar:nth-child(12) {
+      animation-duration: 0.78s;
+      animation-delay: 0.16s;
+    }
+
+    .wave-bar:nth-child(13) {
+      animation-duration: 0.63s;
+      animation-delay: 0.09s;
+    }
+
+    .wave-bar:nth-child(14) {
+      animation-duration: 0.86s;
+      animation-delay: 0.06s;
+    }
+
+    .wave-bar:nth-child(15) {
+      animation-duration: 0.73s;
+      animation-delay: 0.13s;
+    }
+
+    .wave-bar:nth-child(16) {
+      animation-duration: 0.91s;
+      animation-delay: 0.01s;
+    }
+
+    @keyframes wave-bounce {
+      from {
+        height: 4px;
+        opacity: 0.5;
+      }
+
+      to {
+        height: 32px;
+        opacity: 1;
+      }
+    }
+
+    /* Freeze animation when user prefers reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .wave-bar {
+        animation: none;
+        height: 16px;
+        opacity: 0.6;
+      }
+    }
+
+    /* Badge variant for index-finger gesture */
+    .badge-index {
+      background-color: var(--color-surface);
+      color: var(--color-accent);
+    }
   </style>
 </head>
 
@@ -361,13 +505,8 @@
   <header class="page-header">
     <h1 class="page-header__title">Foto kita blur</h1>
 
-    <span
-      id="status-badge"
-      class="badge badge-idle"
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-    >Waiting for camera…</span>
+    <span id="status-badge" class="badge badge-idle" role="status" aria-live="polite" aria-atomic="true">Waiting for
+      camera…</span>
   </header>
 
   <!-- ==================================================================
@@ -383,21 +522,36 @@
 
     <!-- Video wrapper — hidden until camera is ready -->
     <div id="video-wrapper" style="display:none;" data-blur-target>
-      <video
-        id="webcam"
-        autoplay
-        playsinline
-        muted
-        aria-label="Live camera feed"
-      ></video>
+      <video id="webcam" autoplay playsinline muted aria-label="Live camera feed"></video>
       <canvas id="landmark-canvas" aria-hidden="true"></canvas>
     </div>
 
     <!-- Hint strip — visible once camera is running -->
     <p class="hint-strip" id="hint-strip" style="display:none;" aria-hidden="true">
       <span class="hint-dot" id="hint-dot"></span>
-      Show ✌️ to fog the camera · lower your hand to clear it
+      Show ✌️ to fog the camera · point ☝️ to play a tone · lower your hand to clear
     </p>
+
+    <!-- Soundwave visualizer — shown when index-finger gesture is active -->
+    <div id="soundwave" role="img" aria-label="Sound is playing" aria-hidden="true">
+      <!-- 16 bars — heights animated via CSS -->
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+      <span class="wave-bar"></span>
+    </div>
 
     <!-- Error state — shown on permission denied or no API support -->
     <div id="error-state" role="alert" aria-labelledby="error-title">
@@ -415,13 +569,19 @@
        Footer
   =================================================================== -->
   <footer class="page-footer">
-    <p>Show a peace sign ✌️ to fog the camera</p>
-    <p style="margin-top: var(--space-1);">Works in Chrome, Edge, Firefox, and Safari 14+. Requires camera permission.</p>
+    <p>Show a peace sign ✌️ to fog the camera · point ☝️ to play a tone</p>
+    <p style="margin-top: var(--space-1);">Works in Chrome, Edge, Firefox, and Safari 14+. Requires camera permission.
+    </p>
   </footer>
 
   <!-- No-script fallback -->
   <noscript>
-    <style>#loading-state,#video-wrapper { display:none !important; }</style>
+    <style>
+      #loading-state,
+      #video-wrapper {
+        display: none !important;
+      }
+    </style>
     <div style="
       max-width:480px; margin:48px auto; padding:24px;
       border:1px solid #dde8f5; border-radius:12px;
@@ -450,17 +610,18 @@
     /* ------------------------------------------------------------------
        Element refs
     ------------------------------------------------------------------ */
-    const videoEl       = document.getElementById('webcam');
-    const canvasEl      = document.getElementById('landmark-canvas');
-    const videoWrapper  = document.getElementById('video-wrapper');
-    const statusBadge   = document.getElementById('status-badge');
-    const loadingState  = document.getElementById('loading-state');
-    const errorState    = document.getElementById('error-state');
-    const errorBody     = document.getElementById('error-body');
-    const hintStrip     = document.getElementById('hint-strip');
-    const hintDot       = document.getElementById('hint-dot');
-    const reloadBtn     = document.getElementById('reload-btn');
-    const ctx           = canvasEl.getContext('2d');
+    const videoEl = document.getElementById('webcam');
+    const canvasEl = document.getElementById('landmark-canvas');
+    const videoWrapper = document.getElementById('video-wrapper');
+    const statusBadge = document.getElementById('status-badge');
+    const loadingState = document.getElementById('loading-state');
+    const errorState = document.getElementById('error-state');
+    const errorBody = document.getElementById('error-body');
+    const hintStrip = document.getElementById('hint-strip');
+    const hintDot = document.getElementById('hint-dot');
+    const reloadBtn = document.getElementById('reload-btn');
+    const soundwaveEl = document.getElementById('soundwave');
+    const ctx = canvasEl.getContext('2d');
 
     /* ------------------------------------------------------------------
        Reload button
@@ -468,12 +629,34 @@
     reloadBtn.addEventListener('click', () => location.reload());
 
     /* ------------------------------------------------------------------
+       Audio — plays assets/audio/blurr.MP3 on index-finger gesture
+    ------------------------------------------------------------------ */
+    const audio = new Audio('assets/audio/blurr.MP3');
+
+    function startTone() {
+      if (!audio.paused) return;   // already playing — don't restart
+      audio.currentTime = 0;
+      audio.play().catch(() => {}); // swallow autoplay-policy errors silently
+    }
+
+    // Hide the wave only when the audio finishes naturally
+    audio.addEventListener('ended', () => setSoundwave(false));
+
+    /* ------------------------------------------------------------------
+       Soundwave toggle
+    ------------------------------------------------------------------ */
+    function setSoundwave(on) {
+      soundwaveEl.classList.toggle('active', on);
+      soundwaveEl.setAttribute('aria-hidden', String(!on));
+    }
+
+    /* ------------------------------------------------------------------
        Error display helper
     ------------------------------------------------------------------ */
     function showCameraError(err) {
       loadingState.classList.add('hidden');
       videoWrapper.style.display = 'none';
-      hintStrip.style.display    = 'none';
+      hintStrip.style.display = 'none';
 
       // Pick a user-friendly message
       let msg = 'Allow camera permission in your browser settings, then reload the page.';
@@ -495,7 +678,7 @@
     ------------------------------------------------------------------ */
     function setBadge(type, text) {
       statusBadge.textContent = text;
-      statusBadge.className   = `badge badge-${type}`;
+      statusBadge.className = `badge badge-${type}`;
       hintDot.classList.toggle('active', type === 'active');
     }
 
@@ -514,11 +697,20 @@
        A finger is "up" when tip.y < pip.y (smaller y = higher on screen)
     ------------------------------------------------------------------ */
     function isPeaceSign(landmarks) {
-      const indexUp   = landmarks[8].y  < landmarks[6].y;
-      const middleUp  = landmarks[12].y < landmarks[10].y;
-      const ringDown  = landmarks[16].y > landmarks[14].y;
+      const indexUp = landmarks[8].y < landmarks[6].y;
+      const middleUp = landmarks[12].y < landmarks[10].y;
+      const ringDown = landmarks[16].y > landmarks[14].y;
       const pinkyDown = landmarks[20].y > landmarks[18].y;
       return indexUp && middleUp && ringDown && pinkyDown;
+    }
+
+    function isIndexFingerOnly(landmarks) {
+      const indexUp = landmarks[8].y < landmarks[6].y;  // Telunjuk ke atas
+      const middleDown = landmarks[12].y > landmarks[10].y; // Tengah ke bawah (diubah jadi >)
+      const ringDown = landmarks[16].y > landmarks[14].y; // Manis ke bawah
+      const pinkyDown = landmarks[20].y > landmarks[18].y; // Kelingking ke bawah
+
+      return indexUp && middleDown && ringDown && pinkyDown;
     }
 
     /* ------------------------------------------------------------------
@@ -548,13 +740,26 @@
         }
 
         if (isPeaceSign(landmarks)) {
+          // ✌️ Peace sign → blur video
           videoWrapper.classList.add('blurred');
           setBadge('active', 'Peace sign detected ✌️');
+
+        } else if (isIndexFingerOnly(landmarks)) {
+          // ☝️ Index finger only → play audio + show soundwave
+          videoWrapper.classList.remove('blurred');
+          setBadge('index', 'Pointing detected ☝️');
+          startTone();
+          setSoundwave(true);
+
         } else {
+          // Some other hand pose
           videoWrapper.classList.remove('blurred');
           setBadge('idle', 'Hand detected — no gesture');
+          
         }
+
       } else {
+        // No hand in frame
         videoWrapper.classList.remove('blurred');
         setBadge('idle', 'No hand detected');
       }
@@ -564,7 +769,6 @@
        Camera start
     ------------------------------------------------------------------ */
     async function startCamera() {
-      // Guard: API already confirmed present above, but re-check before async path
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
 
       try {
@@ -633,4 +837,5 @@
   </script>
 
 </body>
+
 </html>
